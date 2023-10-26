@@ -11,11 +11,7 @@ API_V1_ROUTER_ADMIN = DefaultRouter()
 API_V1_ROUTER_ADMIN.registry.extend(TASKS_ROUTER.registry)
 
 urlpatterns = [
-    path(
-        "auth/",
-        TokenObtainPairView.as_view(serializer_class=UserToken),
-        name="auth_get_token",
-    ),
-    path("auth/refresh/", TokenRefreshView.as_view(), name="auth_refresh_token"),
-    path("admin/", include(API_V1_ROUTER_ADMIN.urls)),
+    path("authentication/token/", TokenObtainPairView.as_view(serializer_class=UserToken), name="auth_get_token"),
+    path("authentication/refresh/", TokenRefreshView.as_view(), name="auth_refresh_token"),
+    path("", include(API_V1_ROUTER_ADMIN.urls)),
 ]
