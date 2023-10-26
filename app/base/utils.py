@@ -1,35 +1,18 @@
-import os
-
-import boto3
-from django.core.mail import EmailMultiAlternatives
-from django.template.loader import get_template
-
-from core import settings
+import random
+import string
 
 
-class Utils:
-    @staticmethod
-    def upload_pdf(pdf: object, key: object) -> object:
-        """
-        @rtype: object
-        """
-        client = boto3.client("s3")
-        return client.put_object(
-            Bucket=os.environ.get("AWS_STORAGE_BUCKET_NAME"),
-            ACL="public-read",
-            ContentType="application/pdf",
-            Body=pdf,
-            Key=key,
-        )
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    random_chain = "".join(random.choice(chars) for _ in range(size))
+    return random_chain
 
-    @staticmethod
-    def send_mail(subject, body, path_template, data, emails):
-        template = get_template(path_template)
-        content = template.render(data)
 
-        message = EmailMultiAlternatives(
-            subject=subject, body=body, from_email=f"Project Name<{settings.EMAIL_HOST_USER}>", to=emails
-        )
-
-        message.attach_alternative(content, "text/html")
-        message.send()
+def generate_random_slug(model, size=None):
+    if size is None:
+        size = model.SLUG_LENGTH
+    while True:
+        slug = id_generator(size=size)
+        others = model.objects.filter(random_slug=slug)
+        if others.count() == 0:
+            return slug
+        break

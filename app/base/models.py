@@ -1,85 +1,32 @@
-import uuid
-
 from django.db import models
-from phonenumber_field.modelfields import PhoneNumberField
+
+from .utils import generate_random_slug
 
 
-class BaseModel(models.Model):
-    """Base model for create other system models."""
+class RandomSlugModel(models.Model):
+    """
+    Abstract Class with auto-generated random slug
+    """
 
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    is_deleted = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    SLUG_LENGTH = 8
+    random_slug = models.SlugField(editable=False, primary_key=True, max_length=SLUG_LENGTH)
+
+    def save(self, *args, **kwargs):
+        if not self.random_slug:
+            self.random_slug = generate_random_slug(model=self._meta.model, size=self.SLUG_LENGTH)
+        return super().save(*args, **kwargs)
 
     class Meta:
         abstract = True
 
-    def delete(self, using=None, keep_parents=False):
-        self.is_deleted = True
-        self.save()
 
-    def hard_delete(self):
-        super(BaseModel, self).delete()
+class TimeStampedModel(models.Model):
+    """
+    Abstract Class with create and update dates
+    """
 
-
-class CatalogModel(BaseModel):
-    """Base catalog model for create other system catalogues models."""
-
-    name = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True, editable=False)
+    updated_at = models.DateTimeField(auto_now=True, editable=False)
 
     class Meta:
         abstract = True
-        ordering = ["name"]
-
-    def delete(self, using=None, keep_parents=False):
-        self.is_deleted = True
-        self.save()
-
-    def hard_delete(self):
-        super(CatalogModel, self).delete()
-
-    def __str__(self):
-        return self.name
-
-
-class AddressModel(BaseModel):
-    """
-    Base model for common address
-    """
-
-    street_number = models.CharField(max_length=64)
-    route = models.CharField(max_length=255)
-    locality = models.CharField(max_length=255)
-    municipality = models.CharField(max_length=255)
-    state = models.CharField(max_length=255)
-    city = models.CharField(max_length=255)
-    postal_code = models.CharField(max_length=5)
-
-    address_latitude = models.FloatField(blank=True, null=True)
-    address_longitude = models.FloatField(blank=True, null=True)
-
-    formatted_address = models.CharField(max_length=255)
-
-    class Meta:
-        abstract = True
-
-    def __str__(self):
-        return self.formatted_address
-
-
-class ContactModel(BaseModel):
-    """
-    Base model for common contact
-    """
-
-    name = models.CharField(max_length=255)
-    phone = PhoneNumberField(blank=True, null=True)
-    email = models.EmailField(blank=True, null=True)
-    job_title = models.CharField(max_length=128, blank=True, null=True)
-
-    class Meta:
-        abstract = True
-
-    def __str__(self):
-        return f"{self.name}/{self.phone}/{self.email}"
