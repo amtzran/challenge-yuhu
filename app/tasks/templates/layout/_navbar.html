@@ -19,13 +19,10 @@
                 </li>
                 {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a href="{% url 'tasks' %}" class="nav-link">Mis Tareas</a>
+                        <a href="{% url 'task_list' %}" class="nav-link">Mis Tareas</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{% url 'create_task' %}" class="nav-link">Nueva Tarea</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">Salir</a>
+                        <a href="{% url 'task_create' %}" class="nav-link">Nueva Tarea</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
