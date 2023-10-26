@@ -1,0 +1,34 @@
+name: CD Pipeline
+
+on:
+  push:
+    branches: [ "main", "dev" ]
+
+jobs:
+  build:
+
+    runs-on: self-hosted
+
+    steps:
+      - name: Stopping Service
+        run: |
+          cd /home/ec2-user/saas_backend
+          docker-compose -f docker-compose-deploy.yml down
+
+      - name: Updating app
+        run: |
+          cd /home/ec2-user/saas_backend
+          git pull origin
+
+      - name: Then, re-build the app image, so it includes the latest code by running
+        run: |
+          cd /home/ec2-user/saas_backend
+          docker-compose -f docker-compose-deploy.yml build app
+
+      - name: To apply the update, run
+        run: |
+          cd /home/ec2-user/saas_backend
+          docker-compose -f docker-compose-deploy.yml up -d
+
+      - name: Show status containers
+        run: docker ps
