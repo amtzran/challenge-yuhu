@@ -27,7 +27,7 @@ class CustomUserAdmin(UserAdmin):
     """
 
     form = CustomUserChangeForm
-    readonly_fields = ("created_at", "last_login")
+    readonly_fields = ("date_joined", "last_login")
     fieldsets = (
         (None, {"fields": ("email", "password")}),
         ("Permissions", {"fields": ("is_active", "is_staff", "is_superuser", "groups", "user_permissions")}),
