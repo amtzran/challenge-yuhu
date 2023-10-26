@@ -9,7 +9,10 @@ from rest_framework.routers import DefaultRouter
 API_V1_ROUTER_ADMIN = DefaultRouter()
 
 urlpatterns = [
+    # Api urls
     path("admin/", admin.site.urls),
     path("docs/", include_docs_urls(title="Project API")),
     path("api/v1/", include("api.urls")),
+    # Web urls
+    path("web/", include("tasks.web.urls")),
 ]
