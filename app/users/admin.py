@@ -29,22 +29,22 @@ class CustomUserAdmin(UserAdmin):
     form = CustomUserChangeForm
     readonly_fields = ("date_joined", "last_login")
     fieldsets = (
-        (None, {"fields": ("email", "password")}),
+        (None, {"fields": ("name", "email", "password")}),
         ("Permissions", {"fields": ("is_active", "is_staff", "is_superuser", "groups", "user_permissions")}),
-        ("Important dates", {"fields": ("last_login", "created_at")}),
+        ("Important dates", {"fields": ("last_login", "date_joined")}),
     )
     add_fieldsets = (
         (
             None,
             {
                 "classes": ("wide",),
-                "fields": ("email", "password1", "password2"),
+                "fields": ("name", "email", "password1", "password2"),
             },
         ),
     )
-    list_display = ("email", "is_staff")
+    list_display = ("name", "email", "is_staff")
     list_filter = ("is_staff", "is_superuser", "is_active", "groups")
-    search_fields = ("first_name", "last_name", "email")
+    search_fields = ("name", "email")
     ordering = ("email",)
     filter_horizontal = (
         "groups",
