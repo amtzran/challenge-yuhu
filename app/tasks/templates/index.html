@@ -1,0 +1,25 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+    <div style="text-align: center;">
+        <h1>Mis Tareas</h1>
+        <a href="{% url 'task_create' %}">Nueva Tarea</a>
+        {% for task in tasks %}
+            <div>
+                <div>
+                    <h5>{{ task.title }}</h5>
+                    <p>{{ task.description|truncatechars:50 }}</p>
+                    <a href="{% url 'task_detail' task.pk %}">
+                        Ver Tarea
+                    </a>
+                    <a href="{% url 'task_delete' task.pk %}">
+                        Eliminar Tarea
+                    </a>
+                </div>
+            </div>
+        {% empty %}
+            <h3>Aún no tienes tareas.</h3>
+            <a href="{% url 'task_create' %}">Crear nueva Tarea</a>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/web">Challenge | Tasks</a>
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a href="/" class="nav-link">Inicio</a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'tasks' %}" class="nav-link">Mis Tareas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'create_task' %}" class="nav-link">Nueva Tarea</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Salir</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a href="/signin" class="nav-link">Ingresar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/signup" class="nav-link">Registrarme</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
