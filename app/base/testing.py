@@ -15,17 +15,6 @@ class AuthTokenTesting(APITestCase):
         """
         return str(RefreshToken.for_user(user).access_token)
 
-    @staticmethod
-    def get_init_instances(mixer):
-        """
-        Create and return user, company and employee
-        """
-        user = mixer.blend("users.User")
-        company = mixer.blend("companies.Company")
-        employee = mixer.blend("employees.Employee", user=user, company=company)
-
-        return user, company, employee
-
     def get(self, url, token=None, params=None):
         """GET method with access token"""
         kwargs = {}

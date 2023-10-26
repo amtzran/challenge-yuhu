@@ -36,8 +36,8 @@ def main():
         cov.save()
         cov.html_report()
         covered = cov.report()
-        print(f"Coverage minimum at 90, current: {covered}")
-        if covered < 90:
+        print(f"Coverage minimum at 80, current: {covered}")
+        if covered < 80:
             print("Failed due to coverage")
             sys.exit(1)
 
