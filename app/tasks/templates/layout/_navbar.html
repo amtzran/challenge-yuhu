@@ -24,12 +24,15 @@
                     <li class="nav-item">
                         <a href="{% url 'task_create' %}" class="nav-link">Nueva Tarea</a>
                     </li>
+                    <li class="nav-item">
+                        <a href="/web/logout" class="nav-link">Salir</a>
+                    </li>
                 {% else %}
                     <li class="nav-item">
-                        <a href="/signin" class="nav-link">Ingresar</a>
+                        <a href="/web/login" class="nav-link">Ingresar</a>
                     </li>
                     <li class="nav-item">
-                        <a href="/signup" class="nav-link">Registrarme</a>
+                        <a href="/web/signup" class="nav-link">Registrarme</a>
                     </li>
                 {% endif %}
             </ul>

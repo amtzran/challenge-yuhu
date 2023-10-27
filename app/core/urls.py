@@ -15,4 +15,5 @@ urlpatterns = [
     path("api/v1/", include("api.urls")),
     # Web urls
     path("web/", include("tasks.web.urls")),
+    path("web/", include("users.web.urls")),
 ]

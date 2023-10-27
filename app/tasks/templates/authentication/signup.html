@@ -1,0 +1,14 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+    <div class="card container mt-5 p-5">
+        <h3>Crear mi cuenta</h3>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Registrarme</button>
+            <hr>
+            <a href="{% url 'login' %}">Ya tengo una cuenta</a>
+        </form>
+    </div>
+{% endblock %}

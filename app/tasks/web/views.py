@@ -1,4 +1,3 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
@@ -7,7 +6,11 @@ from ..models import Task
 from .forms import TaskForm
 
 
-class BaseView(View, LoginRequiredMixin):
+class BaseView(View):
+    """
+    Base view for generic actions
+    """
+
     model = Task
     success_url = reverse_lazy("task_list")
 
