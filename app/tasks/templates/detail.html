@@ -1,8 +1,10 @@
 {% extends 'layout/base.html' %}
 
 {% block content %}
-    <h1>{{ task.title }}</h1>
-    <p>{{ task.description }}</p>
-    <a href="{% url 'task_update' task.pk %}">Actualizar Tarea</a>
-    <a href="{% url 'task_delete' task.pk %}">Eliminar Tarea</a>
+    <div class="container mt-5">
+        <h3>{{ task.title }}</h3>
+        <p>{{ task.description }}</p>
+        <a href="{% url 'task_update' task.pk %}" class="btn btn-sm btn-primary">Actualizar Tarea</a>
+        <a href="{% url 'task_delete' task.pk %}" class="btn btn-sm btn-danger">Eliminar Tarea</a>
+    </div>
 {% endblock %}

@@ -1,11 +1,11 @@
 {% extends 'layout/base.html' %}
 
 {% block content %}
-    <h1>Eliminar Tarea</h1>
+    <h3>Eliminar Tarea</h3>
     <p>Estás seguro de eliminar la tarea: "{{ object.title }}"?</p>
     <form method="post">
         {% csrf_token %}
-        <button type="submit">Eliminar Tarea</button>
-        <a href="{% url 'task_list' %}">Cancelar</a>
+        <button type="submit" class="btn btn-sm btn-danger">Eliminar Tarea</button>
+        <a href="{% url 'task_list' %}" class="btn btn-sm btn-secondary">Cancelar</a>
     </form>
 {% endblock %}

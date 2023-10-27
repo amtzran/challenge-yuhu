@@ -3,23 +3,23 @@
 {% block content %}
     <div style="text-align: center;">
         <h1>Mis Tareas</h1>
-        <a href="{% url 'task_create' %}">Nueva Tarea</a>
+        <a href="{% url 'task_create' %}" class="btn btn-sm btn-primary">Nueva Tarea</a>
         {% for task in tasks %}
-            <div>
+            <div class="card container mt-3 mb-3 p-3">
                 <div>
                     <h5>{{ task.title }}</h5>
                     <p>{{ task.description|truncatechars:50 }}</p>
-                    <a href="{% url 'task_detail' task.pk %}">
+                    <a href="{% url 'task_detail' task.pk %}" class="btn btn-sm btn-info">
                         Ver Tarea
                     </a>
-                    <a href="{% url 'task_delete' task.pk %}">
+                    <a href="{% url 'task_delete' task.pk %}" class="btn btn-sm btn-danger">
                         Eliminar Tarea
                     </a>
                 </div>
             </div>
         {% empty %}
             <h3>Aún no tienes tareas.</h3>
-            <a href="{% url 'task_create' %}">Crear nueva Tarea</a>
+            <a href="{% url 'task_create' %}" class="btn btn-sm btn-primary">Crear nueva Tarea</a>
         {% endfor %}
     </div>
 {% endblock %}
