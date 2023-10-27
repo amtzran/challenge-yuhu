@@ -1,4 +1,4 @@
-# Starter Project Backend
+# Challenge | Yuhu
 
 Commands:
 
@@ -52,4 +52,13 @@ Install environment packages (local or production).
 - Copy /.env.sample as app/core/.env
 - Copy /.env.sample as /.env
 - Run ```make dev```
+
+## Expresiones de Gratitud 🎁
+
+* De antemano quiero agradecer 🍺  a todo el equipo de **Yuhu** por creer en mi y darme oportunidad de continuar con el proceso de la vacante.
+
+
+
+---
+⌨️ con ❤️ por [Alberto Martínez](https://github.com/amtzran) 😊
 
