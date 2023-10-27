@@ -160,16 +160,19 @@ AWS_DEFAULT_ACL = env.str("AWS_DEFAULT_ACL")
 AWS_BUCKET_ACL = "public-read"
 AWS_QUERYSTRING_AUTH = False
 
-# SendGrid
-SENDGRID_API_KEY = env.str("SENDGRID_API_KEY", default="")
-SEND_EMAILS = env.bool("SEND_EMAILS", default=False)
-FROM_EMAIL = env.str("FROM_EMAIL", default="noreply@sofalm.com")
-
-# SendGrid Templates
-SENDGRID_RESET_PASSWORD_TEMPLATE = env.str("SENDGRID_RESET_PASSWORD_TEMPLATE", default="")
+# Email
+EMAIL_HOST = env.str("EMAIL_HOST")
+EMAIL_PORT = env.str("EMAIL_PORT")
+EMAIL_HOST_USER = env.str("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env.str("EMAIL_HOST_PASSWORD")
+EMAIL_USE_SSL = env.bool("EMAIL_USE_SSL", True)
 
 # Banner data
 ENVIRONMENT_FLOAT = True
+
+# Celery broker and result
+CELERY_BROKER_URL = env.str("CELERY_BROKER_URL", default="redis://localhost:6379/0")
+CELERY_RESULT_BACKEND = env.str("CELERY_BROKER_URL", default="redis://localhost:6379/0")
 
 # Sentry Config
 USE_SENTRY = env.bool("USE_SENTRY", default=False)
