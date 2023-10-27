@@ -48,3 +48,7 @@ requests==2.31.0
 
 # Google Firebase
 google-auth==2.23.0
+
+# Celery
+celery[redis]==5.3.4
+
